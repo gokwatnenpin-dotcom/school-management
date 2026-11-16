@@ -1,0 +1,16 @@
+{
+  "name": "scholara-school-management",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scholara — full-stack school management for principals, teachers and staff.",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "setup": "npm --prefix server install && npm --prefix client install && npm --prefix server run db:migrate && npm --prefix server run db:seed",
+    "db:migrate": "npm --prefix server run db:migrate",
+    "db:seed": "npm --prefix server run db:seed",
+    "db:reset": "npm --prefix server run db:reset"
+  }
+}
