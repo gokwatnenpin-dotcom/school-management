@@ -1,4 +1,5 @@
 const TOKEN_KEY = 'scholara_token';
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
 
 export class ApiError extends Error {
   constructor(message, status, details) {
@@ -29,7 +30,7 @@ export async function api(path, { method = 'GET', body, auth = true } = {}) {
   const hadToken = Boolean(token);
   if (auth && token) headers.Authorization = `Bearer ${token}`;
 
-  const response = await fetch(`/api${path}`, {
+  const response = await fetch(`${API_BASE_URL}/api${path}`, {
     method,
     headers,
     body: body === undefined ? undefined : JSON.stringify(body),
