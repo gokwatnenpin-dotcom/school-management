@@ -2,13 +2,27 @@ import pg from 'pg';
 import { config } from './config.js';
 
 const { Pool } = pg;
+const neonConnection = config.db.connectionString
+  ? new URL(config.db.connectionString)
+  : null;
 
 export const pool = new Pool({
-  host: config.db.host,
-  port: config.db.port,
-  user: config.db.user,
-  password: config.db.password,
-  database: config.db.database,
+  ...(config.db.connectionString
+    ? {
+        host: neonConnection.hostname,
+        port: Number(neonConnection.port || 5432),
+        user: decodeURIComponent(neonConnection.username),
+        password: decodeURIComponent(neonConnection.password),
+        database: neonConnection.pathname.slice(1),
+        ssl: { rejectUnauthorized: true },
+      }
+    : {
+        host: config.db.host,
+        port: config.db.port,
+        user: config.db.user,
+        password: config.db.password,
+        database: config.db.database,
+      }),
   max: 10,
 });
 

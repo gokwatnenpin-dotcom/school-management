@@ -6,6 +6,7 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || 'dev-only-secret-change-me',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '12h',
   db: {
+    connectionString: process.env.DATABASE_URL,
     host: process.env.PGHOST || 'localhost',
     port: Number(process.env.PGPORT || 5432),
     user: process.env.PGUSER || 'postgres',
