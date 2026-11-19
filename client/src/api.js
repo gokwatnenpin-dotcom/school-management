@@ -1,5 +1,7 @@
 const TOKEN_KEY = 'scholara_token';
-const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '')
+  .replace(/\/+$/, '')
+  .replace(/\/api$/, '');
 
 export class ApiError extends Error {
   constructor(message, status, details) {
